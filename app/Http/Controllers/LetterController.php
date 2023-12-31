@@ -16,7 +16,7 @@ class LetterController extends Controller
         public function index()
         {
 
-            $letters = Letter::orderBy('letter_type_id', 'DESC')->with('letter_type', 'user')->simplePaginate(5);
+            $letters = Letter::orderBy('letter_type_id', 'DESC')->with('letter_type', 'user', 'result')->simplePaginate(5);
             // harus gunain with dengan isi public function yang kita buat
 
             // foreach ($letters as $jumlah){
@@ -108,6 +108,13 @@ class LetterController extends Controller
         return $pdf->download('surat.pdf');
     }
 
+    public function PDF($id)
+    {
+        $letter = Letter::with('user')->find($id);
+
+        return view('surat.tu.data.PDF', compact('letter'));
+    }
+
     /**
      * Display the specified resource.
      */
@@ -131,9 +138,33 @@ class LetterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Letter $letter)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'letter_type_id' => 'required',
+            'letter_perihal' => 'required',
+            'recipients' => 'required',
+            'content' => 'required',
+            'notulis' => 'required',
+        ], [
+            'letter_type_id.required' => 'Silahkan diisi terlebih dahulu',
+            'letter_perihal.required' => 'Silahkan diisi terlebih dahulu',
+            'recipients.required' => 'Silahkan diisi terlebih dahulu',
+            'content.required' => 'Silahkan diisi terlebih dahulu',
+            'notulis.required' => 'Silahkan diisi terlebih dahulu',
+        ]);
+
+        Letter::whereId($id)->update([
+            'letter_type_id'=>$request->letter_type_id,
+            'letter_perihal'=>$request->letter_perihal,
+            'recipients'=>$request->recipients,
+            'attachment'=>$request->attachment,
+            'content'=>$request->content,
+            'notulis'=>$request->notulis,
+        ]);
+
+        return redirect()->route('surat.tu.data.index')->with('edited', 'Surat berhasil diubah');
+
     }
 
     /**

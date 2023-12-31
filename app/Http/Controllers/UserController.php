@@ -11,12 +11,15 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->has('nama')) {
-            $searchName = $request->input('nama');
-            $users = User::where('name', 'LIKE', '%'. $searchName. '%')->simplepaginate(10);
-        }else {
-            $users = User::where('role', '=', 'staff')->orderBy('name', 'ASC')->simplePaginate(10);
-        }
+
+            if($request->has('nama')) {
+                $searchName = $request->input('nama');
+                $users = User::where('name', 'LIKE', '%'. $searchName. '%')->simplepaginate(10);
+            }else {
+                $users = User::where('role', '=', 'staff')->orderBy('name', 'ASC')->simplePaginate(10);
+            }
+
+
         return view('user.tu.index', compact('users'));
     }
 
@@ -48,7 +51,7 @@ class UserController extends Controller
         User::create([
             'name' =>$request->name,
             'email' =>$request->email,
-            'role' =>Auth::user()->role,
+            'role' => 'staff',
             'password' => Hash::make($password),
         ]);
 
@@ -97,10 +100,14 @@ class UserController extends Controller
 
     // bagian Guru
 
-    public function indexGuru()
+    public function indexGuru(Request $request)
     {
-
-        $users = User::where('role', 'guru')->orderBy('name', 'ASC')->simplePaginate(10);
+        if($request->has('nama')) {
+            $searchName = $request->input('nama');
+            $users = User::where('name', 'LIKE', '%'. $searchName. '%')->simplepaginate(10);
+        }else {
+            $users = User::where('role', '=', 'guru')->orderBy('name', 'ASC')->simplePaginate(10);
+        }
         return view('user.guru.index', compact('users'));
     }
 
@@ -128,7 +135,7 @@ class UserController extends Controller
         User::create([
             'name' =>$request->name,
             'email' =>$request->email,
-            'role' =>Auth::user()->role,
+            'role' =>'guru',
             'password' => Hash::make($password),
         ]);
 
@@ -143,7 +150,7 @@ class UserController extends Controller
 
     public function editGuru($id)
     {
-        $user =User::find($id);
+        $user = User::find($id);
 
         return view('user.guru.edit', compact('user'));
     }
@@ -193,7 +200,7 @@ class UserController extends Controller
                 return redirect()->route('user.tu.dashboard.page')->with('success', 'Selamat Datang');
 
             } else {
-                return redirect()->route('user.guru.dashboard.page')->with('success', 'Selamat Datang');
+                return redirect()->route('guru.dashboard.page')->with('success', 'Selamat Datang');
             }
         } else {
             return redirect()->back()->with('failed', 'password atau email anda salah silahkan coba kembali');

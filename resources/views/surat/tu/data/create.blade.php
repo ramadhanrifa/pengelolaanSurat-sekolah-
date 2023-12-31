@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>Tambah Data Surat</h1>
-    <h3></h3>
+    <h5><a href="{{route('user.tu.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="{{ route('surat.tu.data.index')}}" class="text-primary-emphasis">Data Surat</a> / <a href="#" class="text-primary">Tambah Surat</a></h5>
 
     <form action="{{ route('surat.tu.data.store') }}" method="POST" enctype="multipart/form-data" class="card ps-5 pe-5">
         @csrf

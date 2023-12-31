@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>Data Surat</h1>
-    <h3></h3>
+    <h5><a href="{{route('user.tu.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="{{ route('surat.tu.data.index')}}" class="text-primary">Data Klasifikasi Surat</a></h5>
 
     <br>
     @if (Session::get('success'))
@@ -15,9 +15,12 @@
     @if (Session::get('created'))
     <div class="alert alert-success">{{ Session::get('created') }}</div>
     @endif
+    @if (Session::get('edited'))
+    <div class="alert alert-success">{{ Session::get('edited') }}</div>
+    @endif
 
 
-    <div class="d-flex justify-content-start">
+    <div class="d-flex justify-content-end">
         <a href="{{ route('surat.tu.data.create') }}" class="btn btn-primary me-3 " aria-current="page">Buat Data</a>
 
     </div>
@@ -50,8 +53,7 @@
             <tr>
                 <td>{{ $no ++ }}</td>
                 <td>
-                    {{-- harus di if dulu --}}
-                     {{$letter->letter_type->letter_code}}/{{$count++}}
+                     {{$letter->letter_type->letter_code}}/{{$letter->id}}/SMKWikrama/XI
                 </td>
                 <td> {{$letter['letter_perihal']}} </td>
                 <td>
@@ -61,12 +63,13 @@
                     {{$tanggal}}
                 </td>
                 <td>
+                    @php $no =1 @endphp
                 @foreach ($letter['recipients'] as $recipients)
-                <ul style="list-style-type: none;">
+                <ol style="list-style-type: none;">
                     <li>
-                        {{$recipients}}
+                       {{$no++}}.{{$recipients}}
                     </li>
-                </ul>
+                </ol>
 
                 @endforeach
                 </td>
@@ -77,12 +80,21 @@
                     @endif
                 </td>
 
-                <td>Hasil Rapat</td>
+                <td>
+                    @foreach ($result as $hasil)
+                    @if($letter->id === $hasil->letter_id)
+                    <p class="text-success">Sudah Dibuat</p>
+                    @else
+                    <a href="{{ route('guru.create', $letter['id'])}}"><button type="button" class="btn btn-warning">Buat Hasil Rapat</button></a>
+                    @endif
+                @endforeach
+
+                </td>
 
                 <td>
 
                     <div class="d-flex justify-content-start">
-                        <a href="{{ route('surat.tu.download', $letter['id']) }}" class="btn btn-success me-2">lihat</a>
+                        <a href="{{ route('surat.tu.data.PDF', $letter['id']) }}" class="btn btn-success me-2">lihat</a>
                         <form action="{{ route('surat.tu.data.delete', $letter['id']) }}" method="POST">
                             @csrf
                             @method('DELETE')

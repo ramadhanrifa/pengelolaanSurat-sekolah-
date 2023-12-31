@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Tambah User</h1>
-    <h3></h3>
+    <h5><a href="{{route('user.tu.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="{{ route('user.tu.index')}}" class="text-primary-emphasis">Data Staff</a> / <a href="#" class="text-primary">Tambah Data Staff</a></h5>
     <div class="d-flex justify-content-end"><a href="{{ route('user.tu.index') }}" class="btn btn-primary me-3 " aria-current="page">Kembali</a>
     </div>
     <br>

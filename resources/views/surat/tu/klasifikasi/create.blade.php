@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>Tambah Data klasifikasi Surat</h1>
-    <h3></h3>
+    <h5><a href="{{route('user.tu.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="{{ route('surat.tu.klasifikasi.index')}}" class="text-primary-emphasis">Data Klasifikasi Surat</a> / <a href="#" class="text-primary">Tambah Klasifikasi Surat</a></h5>
 
     <div class="d-flex justify-content-end"><a href="{{ route('surat.tu.klasifikasi.index') }}" class="btn btn-primary me-3 " aria-current="page">Kembali</a>
     </div>

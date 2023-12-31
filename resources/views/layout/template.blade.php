@@ -15,8 +15,14 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="{{  asset('scripts.js') }}"></script>
+        <style>
+            a {
+                text-decoration: none;
+            }
+        </style>
     </head>
     <body>
+    @if(Auth::check())
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
@@ -29,33 +35,25 @@
                         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Data keterlambatan</a> --}}
                         {{-- @else --}}
 
-                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('user.tu.dashboard.page') }}">Dashboard</a>
-                            <a class="list-group-item list-group-item-action list-group-item-light p-3 dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Data User</a>
-                              <ul class="dropdown-menu">
-                            @if(Auth::check())
+
                                 @if (Auth::user()->role == 'staff')
+                                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('user.tu.dashboard.page') }}">Dashboard</a>
+                                <a class="list-group-item list-group-item-action list-group-item-light p-3 dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Data User</a>
+                                  <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('user.tu.index') }}">Data Staff Tata Usaha</a></li>
-
-
-                                @else
                                     <li><a class="dropdown-item" href="{{ route('user.guru.index') }} ">Data Guru</a></li>
-                                @endif
-                              </ul>
-                                @if (Auth::user()->role == 'staff')
-                                  <a class="list-group-item list-group-item-action list-group-item-light p-3 dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Data Surat</a>
+                                  </ul>
+                                    <a class="list-group-item list-group-item-action list-group-item-light p-3 dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Data Surat</a>
                                     <ul class="dropdown-menu">
                                       <li><a class="dropdown-item" href="{{ route('surat.tu.klasifikasi.index') }}">Data klasifikasi Surat</a></li>
                                       <li><a class="dropdown-item" href="{{ route('surat.tu.data.index') }}">Data Surat</a></li>
                                     </ul>
+
                                 @else
-                                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('user.tu.dashboard.page') }}">Dashboard</a>
+                                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('guru.dashboard.page') }}">Dashboard</a>
+                                <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('guru.index') }}">Data Surat Masuk</a>
+
                                 @endif
-
-                            @endif
-
-
-                        {{-- @endif --}}
-                    {{-- @endif --}}
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -84,6 +82,7 @@
                         </div>
                     </div>
                 </nav>
+                @endif
                 <!-- Page content-->
                 <div class="container-mt-5">
                     <div class="container-fluid">

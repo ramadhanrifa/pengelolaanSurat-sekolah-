@@ -20,6 +20,10 @@ class Letter extends Model
 
             return $this->belongsTo(letter_type::class);
         }
+        public function result()
+        {
+            return $this->belongsTo(Result::class, 'letter_id');
+        }
 
         protected $fillable = [
             'letter_type_id',
@@ -33,5 +37,6 @@ class Letter extends Model
         protected $casts = [
             'recipients' => 'array',
         ];
+
 
 }

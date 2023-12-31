@@ -3,10 +3,12 @@
 @section('content')
 
     <h1>Tambah Data Surat</h1>
-    <h3></h3>
+    <h5><a href="{{route('user.tu.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="{{ route('surat.tu.data.index')}}" class="text-primary-emphasis">Data Surat</a> / <a href="#" class="text-primary">Edit Surat</a></h5>
 
     <form action="{{ route('surat.tu.data.update', $letter['id']) }}" method="POST" enctype="multipart/form-data" class="card ps-5 pe-5">
         @csrf
+        @method('PATCH')
+
 
         {{-- @if(Session::get('created'))
         <div class="alert alert-success">{{ Session::get('created') }}</div>
@@ -76,6 +78,6 @@
               </select>
           </div>
 
-        <button type="submit" class="btn btn-primary">Tambah</button>
+        <button type="submit" class="btn btn-primary">Edit Pesan</button>
     </form>
 @endsection

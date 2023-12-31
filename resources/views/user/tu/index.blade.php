@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Data User</h1>
-    <h3></h3>
+    <h5><a href="{{route('user.tu.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="text-primary">Data Staff</a></h5>
     @if (Session::get('success'))
     <div class="alert alert-success">{{ Session::get('success') }}</div>
     @endif
@@ -13,8 +13,8 @@
     </div>
     <div class="d-flex justify-content-end">
         <form action="{{ route('user.tu.index') }}" method="GET">
-            <input type="text" name="nama" id="nama" class="input-group input-group-sm mb-3" placeholder="Cari nama ?">
-            <input type="submit" class="btn btn-secondary mt-3">
+            <input type="text" name="nama" id="nama" class="ps-3" placeholder="Cari nama ?">
+            <input type="submit" class="btn btn-secondary me-3">
         </form>
         <a href="{{ route('user.tu.index') }}"><button class="btn btn-secondary">Refresh</button></a>
     </div>

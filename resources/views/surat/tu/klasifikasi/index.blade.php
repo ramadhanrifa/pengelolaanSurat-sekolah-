@@ -3,8 +3,8 @@
 @section('content')
 
     <h1>Data Klasifikasi Surat</h1>
-    <h3></h3>
-    <div class="justify-content-start">
+    <h5><a href="{{route('user.tu.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="{{ route('surat.tu.klasifikasi.index')}}" class="text-primary">Data Klasifikasi Surat</a></h5>
+    <div class="d-flex justify-content-end">
             <a href="{{ route('surat.tu.klasifikasi.create') }}" class="btn btn-primary me-3 " aria-current="page">Tambah</a>
             <a href="{{ route('surat.tu.klasifikasi.export.excel') }}" class="btn btn-primary me-3 " aria-current="page">Export to excel</a>
     </div>
@@ -38,11 +38,11 @@
                      </td>
                      <td>
                         <div class="d-flex justify-content-start">
-                            <a href="{{ route('surat.tu.klasifikasi.detail', $tipe['id']) }}">Detail</a>
+                            <a href="{{ route('surat.tu.klasifikasi.detail', $tipe['id']) }}" class="btn btn-warning">Detail</a>
                              <form action="{{ route('surat.tu.klasifikasi.delete', $tipe['id']) }}" method="POST">
                                  @csrf
                                  @method('DELETE')
-                                 <button class="btn btn-danger me-3" type="submit">Hapus</button>
+                                 <button class="btn btn-danger ms-3" type="submit">Hapus</button>
                              </form>
 
                      </td>

@@ -6,27 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Surat</title>
     <style>
-         .container-header {
+     .container-header {
             padding:20px 10px ;
 
+        }
+        h1 {
+            font-size: 20px;
+            border-bottom: 1px solid gray;
+
+        }
+        h3 {
+            font-size: 15px
+        }
+        p{
+            font-size: 12px
         }
         .flex{
             display: flex;
         }
+        .sekolah {
+           width: 12rem;
+        }
         .kontak{
             margin-left: auto;
         }
-        .garis-sekolah{
-            height: 1.5px;
-        background: gray;
-        }
+
         .line-head{
             height: 3px;
             background-color: black;
         }
         .tanggal-keluar {
-            padding-right: 250px;
-            margin-top: 30px;
+            padding-right: auto;
+            margin-top: auto;
             text-align: end;
         }
         .container-terlampir {
@@ -38,22 +49,26 @@
 
         }
         .tujuan {
-            margin-left: 52rem;
+            margin-left: auto;
         }
         .container-isi{
-            padding: 20px 25px;
+            padding: 5px 25px;
         }
         .recipients {
             margin: 5rem;
         }
         .container-td{
-            margin-top: 50;
+            margin-top: 350;
             text-align: end;
             padding-right: 50px;
 
         }
         .td {
-            margin-top: 200px;
+            margin-top: 20px;
+        }
+        .logo {
+            width: 50px;
+            height: 50px
         }
     </style>
 </head>
@@ -63,7 +78,6 @@
             <img src="{{public_path('/wk-removebg-preview.png')}}" alt="" class="logo">
             <div class="sekolah">
                 <h1>SMK WIKRAMA BOGOR</h1>
-                <hr class="garis-sekolah">
                 <h3>Bisnis dan Manajemen Teknologi dan Komunikasi Pariwisata</h3>
             </div>
             <div class="kontak">

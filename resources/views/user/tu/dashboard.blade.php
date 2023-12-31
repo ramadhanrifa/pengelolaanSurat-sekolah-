@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Dashboard</h1>
-        <h3></h3>
+        <h3><a href=""class="text-primary">Dashboard</a></h3>
         <br>
     <div class="d-flex justify-content-center">
 

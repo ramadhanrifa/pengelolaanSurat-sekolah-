@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>Detail Klasifikasi Surat</h1>
-    <h3></h3>
+    <h5><a href="{{route('user.tu.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="{{ route('surat.tu.klasifikasi.index')}}" class="text-primary-emphasis">Data Klasifikasi Surat</a> / <a href="#" class="text-primary">Detail Klasifikasi</a></h5>
 
     <br><br>
     <a href="{{ route('surat.tu.klasifikasi.index') }}" class="btn btn-primary me-3 " aria-current="page">kembali</a>
@@ -18,7 +18,7 @@
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <h5 class="card-title">{{ $letter->letter_perihal }}</h5>
-                <a href="#"><img src="{{ asset('downloads.png') }}" alt="" style="width: 20px"></a>
+                <a href="{{ route('surat.tu.download', $letter['id']) }}"><img src="{{ asset('downloads.png') }}" alt="" style="width: 20px"></a>
             </div>
 
             <p class="card-text">{{ $letter->created_at }}</p>

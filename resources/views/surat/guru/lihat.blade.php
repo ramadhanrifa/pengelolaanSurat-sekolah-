@@ -1,3 +1,6 @@
+@extends('layout.template')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +78,7 @@
             box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.5);
             padding: 20px;
             margin: auto auto;
-            width: 500px;
+            width: 700px;
             background: #fff;
         }
 
@@ -173,39 +176,15 @@
             </div>
         </div>
 
+        <div class="lampiran">
+            
+        </div>
+
 
     </div>
 
 
-    <div class="recipientsPresent">
-        <h2 style="text-align: center;">Peserta Rapat yang hadir</h2>
-        <table class="table table-bordered" border="1" style="margin: auto auto; width: 500px;">
-            <thead>
-                <tr>
-                  <th scope="col">Nama</th>
-                  <th scope="col">Peserta(ceklis jika 'ya') </th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($letter->recipients as $peserta)
-                <tr>
 
-                        <td> {{$peserta}} </td>
-                        <td>
-                          <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="{{ $peserta}}" id="flexCheckCheckedDisabled" name="recipients[]" checked disabled></div>
-                        </td>
-                    @endforeach
-                </tr>
-              </tbody>
-        </table>
-
-        <h3>Ringkasan</h3>
-
-        <p>Ringkaskan</p>
-
-        <h5 style="text-align: end;">notulis: {{$letter->user->name}}</h5>
-    </div>
 
 
 
@@ -214,3 +193,5 @@
 
 </body>
 </html>
+
+@endsection

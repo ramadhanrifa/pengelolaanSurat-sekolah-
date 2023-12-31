@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Data Guru</h1>
-    <h3></h3>
+    <h5><a href="{{route('user.tu.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="{{ route('user.guru.index')}}" class="text-primary">Data Guru</a>
     @if (Session::get('success'))
     <div class="alert alert-success">{{ Session::get('success') }}</div>
     @endif
@@ -10,6 +10,13 @@
     <div class="alert alert-success">{{ Session::get('deleted') }}</div>
     @endif
     <div class="d-flex justify-content-start"><a href="{{ route('user.guru.create') }}" class="btn btn-primary me-3 " aria-current="page">Buat Data</a>
+    </div>
+    <div class="d-flex justify-content-end">
+        <form action="{{ route('user.guru.index') }}" method="GET">
+            <input type="text" name="nama" id="nama" class="ps-3" placeholder="Cari nama ?">
+            <input type="submit" class="btn btn-secondary me-3">
+        </form>
+        <a href="{{ route('user.guru.index') }}"><button class="btn btn-secondary">Refresh</button></a>
     </div>
 
     <table class="table table-hover">
@@ -23,7 +30,6 @@
             </tr>
           </thead>
           <tbody>
-            @if(Auth::user()->role == 'guru')
             @php $no = ($users->currentPage() - 1) * $users->perPage() + 1; @endphp
             @foreach ($users as $item)
             @if($item['role'] == 'guru')
@@ -49,7 +55,6 @@
 
 
             @endforeach
-            @endif
 
       </table>
 @endsection

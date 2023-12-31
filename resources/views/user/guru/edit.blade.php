@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Edit Data TU</h1>
-    <h3></h3>
+    <h5><a href="{{route('user.tu.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="{{ route('user.guru.index')}}" class="text-primary-emphasis">Data Guru</a> / <a href="#" class="text-primary">Edit Data Staff</a></h5>
 
 
     <form action="{{ route('user.guru.update', $user['id']) }}" method="POST" class="card p-5">
