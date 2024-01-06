@@ -59,4 +59,11 @@
             {{-- @endif --}}
 
       </table>
+      <div class="d-flex justify-content-end">
+        {{-- mengecek jika ada data > 0 --}}
+        @if($users->count())
+        {{-- memunculkan tampilan paginate --}}
+            {{ $users->links() }}
+        @endif
+    </div>
 @endsection

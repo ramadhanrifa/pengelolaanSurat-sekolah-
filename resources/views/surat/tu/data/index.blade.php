@@ -45,13 +45,12 @@
             </tr>
           </thead>
           <tbody>
-            @php $no = 1;
-            $count = 1;
+            @php $no = ($letters->currentPage() - 1) * $letters->perPage() + 1;
             @endphp
 
             @foreach ($letters as $letter)
             <tr>
-                <td>{{ $no ++ }}</td>
+                <td>{{ $no++ }}</td>
                 <td>
                      {{$letter->letter_type->letter_code}}/{{$letter->id}}/SMKWikrama/XI
                 </td>
@@ -63,11 +62,11 @@
                     {{$tanggal}}
                 </td>
                 <td>
-                    @php $no =1 @endphp
+                    @php $i =1 @endphp
                 @foreach ($letter['recipients'] as $recipients)
                 <ol style="list-style-type: none;">
                     <li>
-                       {{$no++}}.{{$recipients}}
+                       {{$i++}}.{{$recipients}}
                     </li>
                 </ol>
 
@@ -109,5 +108,13 @@
               </tr>
 
       </table>
+
+      <div class="d-flex justify-content-end">
+        {{-- mengecek jika ada data > 0 --}}
+        @if($letters->count())
+        {{-- memunculkan tampilan paginate --}}
+            {{ $letters->links() }}
+        @endif
+    </div>
 @endsection
 

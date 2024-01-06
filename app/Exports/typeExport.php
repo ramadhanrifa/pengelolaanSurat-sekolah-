@@ -23,6 +23,7 @@ class typeExport implements FromCollection, WithHeadings, WithMapping
        return [
         $letter_type['letter_code'],
         $letter_type['name_type'],
+        $letter_type->letter->count(),
        ];
     }
 

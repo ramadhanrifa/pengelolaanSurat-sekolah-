@@ -47,11 +47,11 @@
                 {{$tanggal}}
             </td>
             <td>
-                @php $no =1 @endphp
+                @php $i =1 @endphp
             @foreach ($letter['recipients'] as $recipients)
             <ol style="list-style-type: none;">
                 <li>
-                   {{$no++}}.{{$recipients}}
+                   {{$i++}}.{{$recipients}}
                 </li>
             </ol>
 
@@ -91,5 +91,12 @@
           </tr>
 
   </table>
+  <div class="d-flex justify-content-end">
+    {{-- mengecek jika ada data > 0 --}}
+    @if($letters->count())
+    {{-- memunculkan tampilan paginate --}}
+        {{ $letters->links() }}
+    @endif
+</div>
 @endsection
 

@@ -36,7 +36,7 @@
             @foreach ($users as $item)
             @if($item['role'] == 'guru')
             <tr>
-                <td>{{ $i++ }} </td>
+                <td>{{ $no++ }} </td>
                 <td>{{$item['name']}} </td>
                 <td>{{$item['email']}} </td>
                 <td>{{$item['role']}} </td>
@@ -59,4 +59,11 @@
             @endforeach
 
       </table>
+      <div class="d-flex justify-content-end">
+        {{-- mengecek jika ada data > 0 --}}
+        @if($users->count())
+        {{-- memunculkan tampilan paginate --}}
+            {{ $users->links() }}
+        @endif
+    </div>
 @endsection
