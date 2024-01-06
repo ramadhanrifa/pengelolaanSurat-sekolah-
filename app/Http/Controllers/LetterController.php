@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Letter;
 use App\Models\letter_type;
 use App\Models\User;
+use App\Models\Result;
 use Illuminate\Http\Request;
 use PDF;
 
@@ -17,13 +18,14 @@ class LetterController extends Controller
         {
 
             $letters = Letter::orderBy('letter_type_id', 'DESC')->with('letter_type', 'user', 'result')->simplePaginate(5);
+            $result = Result::get();
             // harus gunain with dengan isi public function yang kita buat
 
             // foreach ($letters as $jumlah){
             //     $jumlah = Letter::first()->count();
             // }
 
-            return view('surat.tu.data.index', compact('letters'));
+            return view('surat.tu.data.index', compact('letters', 'result'));
         }
 
     /**
@@ -46,6 +48,7 @@ class LetterController extends Controller
             'letter_type_id' => 'required',
             'letter_perihal' => 'required',
             'recipients' => 'required',
+            'attachment' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'content' => 'required',
             'notulis' => 'required',
         ], [
@@ -57,7 +60,22 @@ class LetterController extends Controller
         ]);
         // cara simpel
         $data = $request->all();
-        Letter::Create($data);
+
+        if ($request->hasFile('attachment')) {
+            $imagePath = $request->file('attachment')->store('public/images');
+            $imageName = basename($imagePath);
+            $data['attachment'] = $imageName; // Set the attachment in the $data array
+        }
+
+        $letter = Letter::Create($data);
+
+        $id = $this->create($data)->id;
+
+        Result::create([
+            'letter_id' => $letter->id,
+            'notes'=> null,
+            'presence_recipients'=> null,
+        ]);
 
         // beda lagi ini
         // $arrayDistinct = array_count_values($request->recipients);
@@ -110,9 +128,11 @@ class LetterController extends Controller
 
     public function PDF($id)
     {
-        $letter = Letter::with('user')->find($id);
+        $letters = Letter::with('user', 'result')->find($id);
 
-        return view('surat.tu.data.PDF', compact('letter'));
+
+
+        return view('surat.tu.data.PDF', compact('letters'));
     }
 
     /**
@@ -144,6 +164,7 @@ class LetterController extends Controller
             'letter_type_id' => 'required',
             'letter_perihal' => 'required',
             'recipients' => 'required',
+            'attachment' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'content' => 'required',
             'notulis' => 'required',
         ], [
@@ -154,11 +175,15 @@ class LetterController extends Controller
             'notulis.required' => 'Silahkan diisi terlebih dahulu',
         ]);
 
+        $imagePath = $request->file('attachment')->store('public/images');
+        $imageName = basename($imagePath);
+
+
         Letter::whereId($id)->update([
             'letter_type_id'=>$request->letter_type_id,
             'letter_perihal'=>$request->letter_perihal,
             'recipients'=>$request->recipients,
-            'attachment'=>$request->attachment,
+            'attachment'=>$imageName,
             'content'=>$request->content,
             'notulis'=>$request->notulis,
         ]);
@@ -173,6 +198,7 @@ class LetterController extends Controller
     public function destroy($id)
     {
         Letter::where('id', $id)->delete();
+        Result::where('letter_id', $id)->delete();
 
         return redirect()->back()->with('deleted', 'surat berhasil dihapus');
     }

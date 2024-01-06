@@ -15,11 +15,21 @@ class Result extends Model
 
     public function letter()
     {
-        return $this->belongsTo(Letter::class);
+        return $this->hasMany(Letter::class, 'id');
+    }
+    public function letter_type()
+    {
+        return $this->belongsTo(letter_type::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
     protected $casts = [
         'recipients' => 'array',
     ];
+
+    protected $table = 'results';
 
 }
 

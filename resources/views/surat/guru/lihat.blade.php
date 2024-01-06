@@ -103,14 +103,22 @@
             margin: 100px auto;
 
         }
+        #lampiran {
+            box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            margin: auto auto;
+            width: 700px;
+            background: #fff;
+            margin-top: 50px;
+        }
     </style>
 </head>
 <body>
     <div id="back-wrap">
-        <a href="{{ route('surat.tu.data.index') }}" class="btn-back">Kembali</a>
+        <a href="{{ route('guru.index') }}" class="btn-back">Kembali</a>
     </div>
     <div id="surat">
-        <a href="{{ route('surat.tu.download', $letter['id']) }}" class="btn-print">Cetak (.pdf)</a>
+        <a href="{{ route('guru.download', $letter['id']) }}" class="btn-print">Cetak (.pdf)</a>
 
         <div class="container-header">
             <div class="flex">
@@ -176,9 +184,7 @@
             </div>
         </div>
 
-        <div class="lampiran">
-            
-        </div>
+
 
 
     </div>
@@ -193,5 +199,14 @@
 
 </body>
 </html>
+
+
+<div id="lampiran">
+        <h4 style="text-align: center">Lampiran</h4>
+        {{-- apapun itu jangan sebutin app sama public di kolom url bagian '' --}}
+        <img src="{{ url('storage/images/' . $letter->attachment) }}" alt="Attachment" style="width: 50%; display: block;
+        margin-left: auto;
+        margin-right: auto;" class="lampiran">
+</div>
 
 @endsection

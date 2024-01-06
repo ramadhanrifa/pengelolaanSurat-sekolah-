@@ -66,13 +66,11 @@
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                                <li class="nav-item"><p class="nav-link" href="#!">{{Auth::user()->name}}</p></li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ asset('user.png') }}" alt="user" style="width: 30px; "></a>
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         @if(Auth::check())
-                                            <p class="dropdown-item" href="#">
-                                                {{Auth::user()->name}}
-                                            </p>
                                             <div class="dropdown-divider"></div>
                                             <a class="dropdown-item" href="{{ route('logout')}}">logout</a>
                                         @endif

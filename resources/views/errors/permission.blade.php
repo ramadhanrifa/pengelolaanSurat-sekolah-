@@ -14,7 +14,7 @@
             @if (Auth::user()->role == 'staff')
                     <a href="{{ route('user.tu.dashboard.page') }}" class="btn btn-info mt-3">Kembali</a>
             @else
-                <a href="{{ route('user.guru.dashboard.page') }}" class="btn btn-info mt-3">Kembali</a>
+                <a href="{{ route('guru.dashboard.page') }}" class="btn btn-info mt-3">Kembali</a>
             @endif
         </div>
     </div>

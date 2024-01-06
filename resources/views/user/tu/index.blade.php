@@ -29,7 +29,7 @@
             </tr>
           </thead>
           <tbody>
-            @if(Auth::user()->role == 'staff')
+            {{-- @if(Auth::user()->role == 'staff') --}}
             @php $no = ($users->currentPage() - 1) * $users->perPage() + 1; @endphp
 
             @foreach ($users as $item)
@@ -56,7 +56,7 @@
 
 
             @endforeach
-            @endif
+            {{-- @endif --}}
 
       </table>
 @endsection

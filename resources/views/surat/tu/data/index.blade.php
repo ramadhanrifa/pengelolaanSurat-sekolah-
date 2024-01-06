@@ -81,13 +81,13 @@
                 </td>
 
                 <td>
-                    @foreach ($result as $hasil)
-                    @if($letter->id === $hasil->letter_id)
-                    <p class="text-success">Sudah Dibuat</p>
+                    {{-- @foreach ($result as $hasil) --}}
+                    @if($letter->result->notes == null)
+                    <p class="text-warning">Belum Dibuat</p>
                     @else
-                    <a href="{{ route('guru.create', $letter['id'])}}"><button type="button" class="btn btn-warning">Buat Hasil Rapat</button></a>
+                    <p class="text-success">Sudah Dibuat</p>
                     @endif
-                @endforeach
+                {{-- @endforeach --}}
 
                 </td>
 

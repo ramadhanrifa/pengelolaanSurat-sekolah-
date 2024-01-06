@@ -6,8 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Surat</title>
     <style>
-     .container-header {
+        .-td-header {
             padding:20px 10px ;
+            display: flex;
 
         }
         h1 {
@@ -23,57 +24,78 @@
         }
         .flex{
             display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .sekolah {
-           width: 12rem;
+           width: 18rem;
+           margin-left: 85px;
+           float: inline-start;
+           /* height: 80%; */
         }
         .kontak{
-            margin-left: auto;
+            margin-left: 60%;
+            /* margin-bottom: 50%; */
+            width: 40%;
+            float: inline-end;
+            /* height: 80%; */
         }
 
         .line-head{
+            margin-top: 25%;
+            border-bottom: 1px solid;
             height: 3px;
             background-color: black;
         }
         .tanggal-keluar {
+            float: right;
             padding-right: auto;
             margin-top: auto;
             text-align: end;
         }
-        .container-terlampir {
+        .-td-terlampir {
             display: flex;
+
+            float: inline-start;
+        }
+        .data-surat {
+            float: inline-start;
             margin-top: 20px;
             padding: 25px 15px;
         }
-        .data-surat {
-
-        }
         .tujuan {
-            margin-left: auto;
+            margin-left: 40rem;
+            /* float: inline-end; */
+            margin-top: 3rem;
+            /* padding: 25px 15px; */
         }
-        .container-isi{
+        .-td-isi{
+            margin-top: 15rem;
             padding: 5px 25px;
+            margin-left: 2%;
         }
         .recipients {
-            margin: 5rem;
+            margin: 5rem 0;
         }
         .container-td{
-            margin-top: 350;
+            margin-top: 7rem;
             text-align: end;
             padding-right: 50px;
-
+            float: right;
         }
         .td {
-            margin-top: 20px;
+            margin-top: 5rem;
+            float: right;
         }
         .logo {
-            width: 50px;
-            height: 50px
+            width: 75px;
+            height: 75px;
+            float: left;
         }
     </style>
 </head>
 <body>
-    <div class="container-header">
+    <div class="-td-header">
         <div class="flex">
             <img src="{{public_path('/wk-removebg-preview.png')}}" alt="" class="logo">
             <div class="sekolah">
@@ -87,8 +109,9 @@
                 <p>website: www.smkwikrama.sch.id</p>
             </div>
         </div>
-        <hr class="line-head">
+
     </div>
+        <div class="line-head"> </div>
 
         <div class="tanggal-keluar">
                 @php
@@ -98,7 +121,7 @@
             {{$tanggal}}
         </div>
 
-    <div class="container-terlampir">
+    <div class="-td-terlampir">
 
             <div class="data-surat">
                 <div class="no_surat">
@@ -118,21 +141,25 @@
 
     </div>
 
-    <div class="container-isi">
+    <div class="-td-isi">
      {!! $letter['content'] !!}
     </div>
 
     <div class="recipients">
-        <ol>
-            @foreach ($letter['recipients'] as $peserta )
-            <li> {{$peserta}} </li>
+        @php
+            $no = 1;
+        @endphp
+        @foreach ($letter['recipients'] as $peserta )
+        <ol style="list-style: none">
+
+            <li> {{$no++}} {{$peserta}} </li>
 
         </ol>
             @endforeach
 
     </div>
 
-    <div class="container">
+    <div class="container-td">
         <p>Hormat Kami,</p>
         <p>Kepala SMK Wikrama Bogor</p>
 

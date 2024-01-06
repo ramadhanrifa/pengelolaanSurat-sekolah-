@@ -65,13 +65,15 @@
             </td>
 
                 <td>
-                @foreach ($result as $hasil)
-                    @if($letter->id === $hasil->letter_id)
-                    <p class="text-success">Sudah Dibuat</p>
-                    @else
-                    <a href="{{ route('guru.create', $letter['id'])}}"><button type="button" class="btn btn-warning">Buat Hasil Rapat</button></a>
-                    @endif
-                @endforeach
+                        {{-- @foreach($results as $result) --}}
+                            @if($letter->result->notes == null)
+                                <a href="{{ route('guru.create', $letter->id)}}"><button type="button" class="btn btn-warning">Buat Hasil Rapat</button></a>
+                            @else
+                            <p class="text-success">Sudah Dibuat</p>
+                            @endif
+                        {{-- @endforeach --}}
+                    {{-- @endif --}}
+
 
                 </td>
 

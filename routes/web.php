@@ -96,8 +96,9 @@ Route::middleware('IsLogin', 'IsTu')->group(function(){
                        Route::get('/', [Dashboard::class, 'dashboardGuru'])->name('dashboard.page');
                        Route::get('/index', [ResultController::class, 'index'])->name('index');
                        Route::get('/create/{id}', [ResultController::class, 'create'])->name('create');
-                       Route::post('/store', [ResultController::class, 'store'])->name('store');
+                       Route::patch('/hasilkan', [ResultController::class, 'update'])->name('update');
                        Route::get('/lihat/{id}', [ResultController::class, 'show'])->name('lihat');
+                       Route::get('/downloadPDF/{id}', [LetterController::class, 'downloadPDF'])->name('download');
 
                    });
         });

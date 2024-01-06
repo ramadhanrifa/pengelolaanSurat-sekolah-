@@ -17,12 +17,11 @@ class Letter extends Model
         public function letter_type()
         {
             // jika seperti ini kita hanya dapat memamnggil id dengan nama yang hampir sama
-
             return $this->belongsTo(letter_type::class);
         }
         public function result()
         {
-            return $this->belongsTo(Result::class, 'letter_id');
+            return $this->hasOne(Result::class);
         }
 
         protected $fillable = [

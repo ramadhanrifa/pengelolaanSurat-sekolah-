@@ -13,11 +13,11 @@ class ResultController extends Controller
      */
     public function index()
     {
-        $letters = Letter::orderBy('letter_type_id', 'DESC')->with('letter_type', 'result')->simplePaginate(5);
+        $letters = Letter::orderBy('letter_type_id', 'DESC')->with('letter_type', 'user', 'result')->simplePaginate(5);
         // dd($letters);
-        $result = Result::all();
+        $results = Result::all();
 
-        return view('surat.guru.index', compact('letters', 'result'));
+        return view('surat.guru.index', compact('letters', 'results'));
 
     }
 
@@ -37,25 +37,7 @@ class ResultController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'letter_id' => 'required',
-            'notes' => 'required',
-            'presence_recipients' => 'required',
-        ], [
-            'letter_id.required'=> 'harap Diisi',
-            'notes.required'=> 'harap Diisi',
-            'presence_recipients.required'=> 'harap Diisi',
-        ]);
 
-        $presence_recipients = json_encode($request->input('presence_recipients'));
-
-        Result::create([
-            'letter_id'=>$request->letter_id,
-            'presence_recipients'=>$presence_recipients,
-            'notes'=>$request->notes,
-
-        ]);
-        return redirect()->route('guru.index')->with('success', 'berhasil menambahkan hasil');
     }
 
     /**
@@ -81,7 +63,25 @@ class ResultController extends Controller
      */
     public function update(Request $request, Result $result)
     {
-        //
+        $request->validate([
+            'letter_id' => 'required',
+            'notes' => 'required',
+            'presence_recipients' => 'required',
+        ], [
+            'letter_id.required'=> 'harap Diisi',
+            'notes.required'=> 'harap Diisi',
+            'presence_recipients.required'=> 'harap Diisi',
+        ]);
+
+        $presence_recipients = json_encode($request->input('presence_recipients'));
+
+        Result::where('letter_id', $request->letter_id)->update([
+            'letter_id'=>$request->letter_id,
+            'presence_recipients'=>$presence_recipients,
+            'notes'=>$request->notes,
+
+        ]);
+        return redirect()->route('guru.index')->with('success', 'berhasil menambahkan hasil');
     }
 
     /**

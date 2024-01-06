@@ -5,8 +5,9 @@
 <h1>Hasil Surat</h1>
 <h5><a href="{{route('guru.dashboard.page')}}" class="text-primary-emphasis">Dashboard</a> / <a href="{{ route('guru.index')}}" class="text-primary-emphasis">Data Surat Masuk</a> / <a href="#" class="text-primary">Hasil Surat</a></h5>
 
-<form action="{{ route('guru.store') }}" method="POST" enctype="multipart/form-data" class="card ps-5 pe-5">
+<form action="{{ route('guru.update') }}" method="POST" enctype="multipart/form-data" class="card ps-5 pe-5">
     @csrf
+    @method('PATCH')
 
     <input type="number" id="id" name="letter_id" value="{{$letters->id}}" hidden>
 

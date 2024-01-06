@@ -11,10 +11,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Surat Keluar</h5>
                     <div class="d-flex">
-                        <img src="{{ asset('user1.png') }}" style="width: 15px; height:15px; " alt=""
-                            class="logo">
-                        <p class="card-text ms-2">{{$surat}}
-                        </p>
+                        <img src="{{ asset('user1.png') }}" style="width: 15px; height:15px; " alt="" class="logo">
+                    {{-- @for($no = 1; $no) --}}
+                        <p class="card-text ms-2">{{$surat}}</p>
+
                     </div>
                 </div>
             </div>

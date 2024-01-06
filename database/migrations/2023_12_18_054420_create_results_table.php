@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->foreignId('letter_id');
-            $table->text('notes');
-            $table->json('presence_recipients');
+            $table->text('notes')->nullable();
+            $table->json('presence_recipients')->nullable();
             $table->timestamps();
         });
     }

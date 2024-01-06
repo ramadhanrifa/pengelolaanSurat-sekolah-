@@ -107,7 +107,7 @@
         <a href="{{ route('surat.tu.data.index') }}" class="btn-back">Kembali</a>
     </div>
     <div id="surat">
-        <a href="{{ route('surat.tu.download', $letter['id']) }}" class="btn-print">Cetak (.pdf)</a>
+        <a href="{{ route('surat.tu.download', $letters['id']) }}" class="btn-print">Cetak (.pdf)</a>
 
         <div class="container-header">
             <div class="flex">
@@ -126,18 +126,18 @@
             <hr class="line-head">
         </div>
 
-            <div class="tanggal-keluar"> {{ date('d F Y', strtotime($letter->created_at)) }}</div>
+            <div class="tanggal-keluar"> {{ date('d F Y', strtotime($letters->created_at)) }}</div>
 
         <div class="container-terlampir">
 
                 <div class="data-surat">
                     <div class="no_surat">
-                        @if($letter->letter_type)
-                            No : {{$letter->letter_type->letter_code}}
+                        @if($letters->letter_type)
+                            No : {{$letters->letter_type->letter_code}}
                         @endif
                     </div>
                     <div class="perihal">
-                        Hal : <strong>{{$letter->letter_perihal}}</strong>
+                        Hal : <strong>{{$letters->letter_perihal}}</strong>
                     </div>
                 </div>
                 <div class="tujuan">
@@ -150,15 +150,15 @@
         </div>
 
         <div class="container-isi">
-         {!! $letter->content !!}
+         {!! $letters->content !!}
         </div>
 
         <div class="recipients">
             <ol>
-                @foreach ($letter->recipients as $peserta )
+                @foreach ($letters->recipients as $letter )
 
-                    <li> {{$peserta}} </li>
-                    @endforeach
+                    <li> {{$letter}} </li>
+                @endforeach
             </ol>
 
 
@@ -187,24 +187,28 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($letter->recipients as $peserta)
+                    @foreach($letters->recipients as $peserta)
                 <tr>
-
                         <td> {{$peserta}} </td>
+                        {{-- @foreach($letters->result->presence_recipients as $recipients) --}}
                         <td>
                           <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="{{ $peserta}}" id="flexCheckCheckedDisabled" name="recipients[]" checked disabled></div>
+                            @if($peserta === $letters->result->presence_recipients)
+                                <input class="form-check-input" type="checkbox" name="recipients[]" disabled ></div>
+                            @else
+                                <input class="form-check-input" type="checkbox" value="{{$peserta}}" name="{{$peserta}}" checked disabled style="accent-color: #007ffd"></div>
+                            @endif
                         </td>
-                    @endforeach
+                        {{-- @endforeach --}}
+
+                        @endforeach
                 </tr>
               </tbody>
         </table>
-
         <h3>Ringkasan</h3>
 
-        <p>Ringkaskan</p>
-
-        <h5 style="text-align: end;">notulis: {{$letter->user->name}}</h5>
+        <p>{!! $letters->result->notes !!}</p>
+        <h5 style="text-align: end;">notulis: {{$letters->user->name}}</h5>
     </div>
 
 
